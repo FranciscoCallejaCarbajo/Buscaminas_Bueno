@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscaminas</title>
+
+  <!-- Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Estilos del tablero -->
+  <link rel="stylesheet" href="/css/styleTablero.css">
+
+  <!-- Fuente personalizada -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body id="cuerpo">
+
+  <!-- Contenedor principal -->
+  <div class="contenedor-principal">
+
+    <!-- Contenedor de los botones, estado y opciones del juego -->
+    <div class="game-controls">
+      <button class="button" id="start-timer">00:00</button>
+      <button class="button" id="iniciarJuego2">RESET</button>
+      <button id="abrirJugarMas">Jugar con más casillas/Filas/Bombas</button>
+      
+      <!-- Estado del juego (minas restantes) -->
+      <div id="estado">
+        <div>Nº de minas restante: <span id="numMinasRestantes"></span></div>
+      </div>
+    </div>
+
+    <!-- Formulario para personalizar el tablero -->
+    <div id="formContainer" class="hidden">
+      <label for="numFilas">Número de Filas:</label>
+      <input type="number" id="numFilas" name="numFilas" min="1" required>
+
+      <label for="numColumnas">Número de Columnas:</label>
+      <input type="number" id="numColumnas" name="numColumnas" min="1" required>
+
+      <label for="numMinasTotales">Número de Minas Totales:</label>
+      <input type="number" id="numMinasTotales" name="numMinasTotales" min="1" required>
+
+      <button id="iniciarJuego1">Iniciar Juego</button>
+    </div>
+
+    <!-- Tablero del juego -->
+    <div id="tablero"></div>
+
+    <!-- Modal de victoria -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <p>¡Felicidades! Has ganado el juego.</p>
+        <button id="btnResetModal" onclick="inicioBoton()">Reiniciar Juego</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts del juego -->
+  <script src="/javaScript/tablero.js"></script>
+
+</body>
+
+</html>

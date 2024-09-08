@@ -1,0 +1,155 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo oscuro general */
+body {
+    background-color: #1e1e1e; /* Fondo oscuro */
+    overflow: hidden;
+    font-family: "Poppins", sans-serif; /* Tipografía moderna */
+    color: white; /* Texto en blanco para mejor contraste */
+}
+
+/* Contenedor principal */
+.contenedor {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Título grande, centrado */
+.contenedor h1 {
+    position: relative;
+    bottom: 20vh;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 5em; /* Ajustado */
+    text-transform: uppercase;
+    width: 100vw;
+    padding: 20px;
+    letter-spacing: 2px;
+}
+
+/* Imagen decorativa */
+.contenedor img {
+    position: absolute;
+    top: 60%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: 15vw; /* Tamaño ajustado */
+}
+
+/* Botón de "Start" */
+.contenedor a {
+    display: inline-block;
+    text-decoration: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 2em; /* Tamaño ajustado */
+    background-color: #007acc; /* Botón azul */
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.contenedor a:hover {
+    background-color: #005f9e; /* Azul más oscuro en hover */
+}
+
+/* Carretera en la parte inferior */
+#carretera {
+    display: flex;
+    align-items: flex-start;
+    height: 10vh;
+    flex-direction: row;
+    width: 100vw;
+    background-color: #2c3e50; /* Color gris oscuro simulando la carretera */
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    border-top: 5px solid #ecf0f1; /* Línea blanca para simular las divisiones de la carretera */
+}
+
+/* Coche y autobús */
+#coche, #autobus {
+    position: relative;
+    bottom: 30px;
+    align-self: flex-end;
+    width: 6vw;
+    margin: 10px;
+
+}
+
+/* Autobús inicia invisible y luego aparece */
+#autobus {
+    display: none;
+}
+
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 1024px) {
+    .contenedor h1 {
+        font-size: 4em;
+    }
+
+    .contenedor img { 
+        width: 12em;
+    }
+
+    .contenedor a { 
+        font-size: 1.5em;
+        padding: 8px 16px;
+    }
+
+    #coche, #autobus {
+        width: 12vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor h1 {
+        font-size: 3em;
+    }
+
+    .contenedor img {
+        top: 50%; 
+        left: 50%;
+        z-index: -1;
+        width: 10em;
+    }
+
+    .contenedor a {
+        font-size: 1.5em;
+        padding: 8px 16px;
+    }
+
+    #coche, #autobus {
+        width: 10vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .contenedor h1 {
+        font-size: 2.5em;
+    }
+
+    .contenedor a {
+        font-size: 1.2em;
+        padding: 6px 12px;
+    }
+
+    #coche, #autobus {
+        width: 15vw;
+    }
+}

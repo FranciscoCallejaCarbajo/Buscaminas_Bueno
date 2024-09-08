@@ -1,0 +1,309 @@
+:root {
+    --num-columnas: 10;
+    --num-filas: 10;
+    --size: 3rem; /* Tamaño de las casillas del tablero */
+}
+body {
+	font-family: 'Poppins', sans-serif; /* Fuente limpia y moderna */
+}
+@font-face {
+  font-family: 'fontello';
+  src: url('./fontello.eot');
+  src: url('./fontello.woff2') format('woff2'),
+	   url('./fontello.woff') format('woff'),
+	   url('./fontello.ttf') format('truetype'),
+	   url('./fontello.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* Colores para las casillas con un esquema más atractivo */
+#tablero div.c1 { color: #1abc9c; } /* Verde agua */
+#tablero div.c2 { color: #3498db; } /* Azul claro */
+#tablero div.c3 { color: #9b59b6; } /* Púrpura */
+#tablero div.c4 { color: #f39c12; } /* Naranja */
+#tablero div.c5 { color: #e74c3c; } /* Rojo */
+#tablero div.c6 { color: #e67e22; } /* Naranja oscuro */
+#tablero div.c7 { color: #95a5a6; } /* Gris claro */
+#tablero div.c8 { color: #7f8c8d; } /* Gris oscuro */
+
+/* Colores para las casillas que contienen minas */
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	font-family: "fontello";
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1em;
+	margin-left: .2em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-shadow: 2px 2px 2px #999999;
+  }
+  
+
+/* Fondo oscuro general */
+#cuerpo {
+    background-color: #1e1e1e; /* Gris oscuro tipo modo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Contenedor principal */
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Controles del juego: centrados y con espaciado */
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Botones más pequeños y con estilo modo oscuro */
+.button {
+    background-color: #444444; /* Gris oscuro para botones */
+    border: none;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px; /* Tamaño reducido de fuente */
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #666666; /* Gris claro al pasar el ratón */
+}
+
+/* Botón "Jugar con más casillas" */
+#abrirJugarMas {
+    background-color: #007acc; /* Azul para resaltar */
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#abrirJugarMas:hover {
+    background-color: #005f9e; /* Azul más oscuro en hover */
+}
+
+#tablero{
+	padding: 10px;
+	display:grid;
+	grid-template-columns: repeat(var(--num-columnas), var(--size));
+	grid-template-rows: repeat(var(--num-filas), var(--size));
+	background-color: #BBBBBB;
+	border-left: 2px solid #D3D3D3;
+	border-top: 2px solid #D3D3D3;
+	border-right: 2px solid #A9A9A9;
+	/* border-bottom: 2px solid #A9A9A9; */
+	width: calc(var(--num-columnas)*var(--size));
+}
+
+
+#tablero div{
+	background-color: #BBBBBB;
+	border-left: 2px solid #D3D3D3;
+	border-top: 2px solid #D3D3D3;
+	border-right: 2px solid #A9A9A9;
+	border-bottom: 2px solid #A9A9A9;
+	text-align: center;
+	line-height: var(--size);
+}
+
+
+#tablero div.destapado {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    border: 1px solid #999999;
+    background-color: #333333;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+
+
+#tablero div.sinmarcar {
+    background-color: #FF0000;
+}
+
+
+#tablero div.banderaErronea {
+    background-color: #AAAAAA;
+    border: 1px solid #B22222;
+}
+
+
+/* Estado del juego (minas restantes) */
+#estado {
+    background-color: #333333; /* Fondo gris oscuro */
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff; /* Texto blanco */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    text-align: center;
+    width: auto;
+}
+
+
+/* Modal de felicitaciones */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Más oscuro para el fondo del modal */
+}
+
+
+
+/* Modal de felicitaciones */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Más oscuro para el fondo del modal */
+}
+
+.modal-content {
+    background-color: #2b2b2b;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    color: white; /* Texto en blanco */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.icon-bandera:before { content: '\e800';  color: #B22222;}
+.icon-duda:before { content: '\e801'; }
+.icon-bomba:before { content: '\f1e2'; }
+
+/* Formulario oculto por defecto */
+.hidden {
+    display: none;
+}
+
+/* Contenedor del formulario */
+#formContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #444444; /* Fondo del formulario en gris oscuro */
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    color: white; /* Texto blanco */
+}
+
+/* Temporizador */
+#start-timer {
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 20px;
+    background-color: #00add6;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Responsive design - Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    #abrirJugarMas {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+
+    #estado {
+        font-size: 12px;
+    }
+
+    #tablero {
+        --size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+    #abrirJugarMas {
+        font-size: 10px;
+        padding: 6px 12px;
+    }
+
+    #estado {
+        font-size: 10px;
+    }
+
+    #tablero {
+        --size: 25px;
+    }
+}
